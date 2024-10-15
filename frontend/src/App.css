@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+.font-1 {
+    font-family: "Hind", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.font-2 {
+    .yatra-one-regular {
+        font-family: "Yatra One", system-ui;
+        font-weight: 400;
+        font-style: normal;
+    }
+}
+
+.font-3 {
+    font-family: "Yantramanav", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.font-4 {
+    font-family: "Khand", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.font-5 {
+    font-family: "Comic Neue", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
