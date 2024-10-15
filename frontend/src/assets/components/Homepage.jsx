@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Home, Compass, List, Clock, Search } from 'lucide-react';
 import Podcasts from './Podcasts';
+
+
 
 const Homepage = () => {
     const NavItem = ({ icon, label }) => (
@@ -11,6 +13,8 @@ const Homepage = () => {
     );
 
     return (
+        <>
+        <PlaySong />
         <div className='flex flex-row justify-between text-white sticky top-0 left-0 right-0'>
             <div className="flex   bg-slate-950 text-white min-h-screen ">
                 <nav
@@ -183,7 +187,7 @@ const Homepage = () => {
             </div>
             <Podcasts />
         </div>
-        // </div >
+        </>
     )
 }
 
