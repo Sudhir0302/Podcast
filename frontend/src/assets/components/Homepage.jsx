@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Home, Compass, List, Clock, Search } from 'lucide-react';
 import Podcasts from './Podcasts';
-
+import Box from './Box';
 
 
 const Homepage = () => {
+
+    const[songs,setSongs]=useState([]);
+
     const NavItem = ({ icon, label }) => (
         <li className="flex items-center space-x-4 text-gray-300 hover:text-white cursor-pointer">
             {icon}
@@ -12,9 +15,22 @@ const Homepage = () => {
         </li>
     );
 
+    useEffect(()=>{
+        const fetchSongs =async ()=>{
+            try{
+                const response= await fetch('http://localhost:5000/songs');
+                const data=await response.json()
+                setSongs(data)
+                console.log(data);
+            }catch(error){
+                console.log(error);
+            }
+        }
+        fetchSongs();
+    },[])
+    
     return (
         <>
-        <PlaySong />
         <div className='flex flex-row justify-between text-white sticky top-0 left-0 right-0'>
             <div className="flex   bg-slate-950 text-white min-h-screen ">
                 <nav
@@ -58,67 +74,19 @@ const Homepage = () => {
                         </div>
                     </div>
                 </div>
+                <div className='mt-6 pb-2 pl-9 '>
+                    <h2 className='text-md font-3 text-left '>Trending podcasts in all genres</h2>
+                    <p className='text-sm text-left'>Explore the latest trends and get excited!</p>
+                </div>
                 <div>
-                    <div className='mt-6 pb-2 pl-9 '>
-                        <h2 className='text-md font-3 text-left '>Trending podcasts in all genres</h2>
-                        <p className='text-sm text-left'>Explore the latest trends and get excited!</p>
-                    </div>
                     <div className='px-10 font-5 border-b pb-9 border-slate-700'>
                         <div className='flex flex-row justify-between gap-7 '>
-                            <div class="w-64 max-w-sm  border border-gray-200 rounded-lg shadow bg-slate-700 dark:border-gray-700">
-                                <a href="#">
-                                    <img class="p-4 rounded-t-lg" src="/img/p1.jpg" alt="product image" />
-                                </a>
-                                <div class="pb-3">
-                                    <a href="#">
-                                        <h5 class="text-xl tracking-tight text-gray-900 dark:text-white">Wave dream live </h5>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="w-64 max-w-sm  border border-gray-200 rounded-lg shadow bg-slate-700 dark:border-gray-700">
-                                <a href="#">
-                                    <img class="p-4 rounded-t-lg" src="/img/p1.jpg" alt="product image" />
-                                </a>
-                                <div class="">
-                                    <a href="#">
-                                        <h5 class="text-xl  tracking-tight text-gray-900 dark:text-white">Wave dream live </h5>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="w-64 max-w-sm  border border-gray-200 rounded-lg shadow bg-slate-700 dark:border-gray-700">
-                                <a href="#">
-                                    <img class="p-4 rounded-t-lg" src="/img/p1.jpg" alt="product image" />
-                                </a>
-                                <div class="">
-                                    <a href="#">
-                                        <h5 class="text-xl  tracking-tight text-gray-900 dark:text-white">Wave dream live </h5>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="w-64 max-w-sm  border border-gray-200 rounded-lg shadow bg-slate-700 dark:border-gray-700">
-                                <a href="#">
-                                    <img class="p-4 rounded-t-lg" src="/img/p1.jpg" alt="product image" />
-                                </a>
-                                <div class="">
-                                    <a href="#">
-                                        <h5 class="text-xl  tracking-tight text-gray-900 dark:text-white">Wave dream live </h5>
-                                    </a>
+                            {
+                            songs.map((song)=>(
 
+                                <Box songId={song._id} />
 
-                                </div>
-                            </div>
-                            <div class="w-64 max-w-sm  border border-gray-200 rounded-lg shadow bg-slate-700 dark:border-gray-700">
-                                <a href="#">
-                                    <img class="p-4 rounded-t-lg" src="/img/p1.jpg" alt="product image" />
-                                </a>
-                                <div class="">
-                                    <a href="#">
-                                        <h5 class="text-xl  tracking-tight text-gray-900 dark:text-white">Wave dream live </h5>
-                                    </a>
-
-
-                                </div>
-                            </div>
+                            ))}  
                         </div>
                     </div>
                 </div>

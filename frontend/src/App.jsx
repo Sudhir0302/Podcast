@@ -7,11 +7,11 @@ import PlaySong from './assets/components/PlaySong'
 const App = () => {
 
   return (
-      <PlaySong />
-    // <div className='text-2xl text-center bg-slate-950'>
-    //   {/* <Homepage /> */}
-    //   {/* <Podcasts/> */}
-    // </div>
+    // <div> <PlaySong /></div>
+    <div className='text-2xl text-center bg-slate-950'>
+      <Homepage />
+      {/* <Podcasts/> */}
+    </div>
   )
 }
 
