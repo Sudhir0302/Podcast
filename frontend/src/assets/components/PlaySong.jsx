@@ -28,7 +28,7 @@ const PlaySong = () => {
     const [songs, setSongs] = useState([]);
     const [currentSongId, setCurrentSongId] = useState(null);
     const [songFile, setSongFile] = useState(null);
-   
+    const [Genre,setGenre]=useState();
     const togglePlay = () => {
         if (isPlaying) {
             audioRef.current.pause();
@@ -61,8 +61,8 @@ const PlaySong = () => {
 
         const formData = new FormData();
         formData.append('song', songFile);
-        formData.append('title', songFile.name); 
-
+        formData.append('title', songFile.name);
+        formData.append('genre',Genre);  
         try {
             const response = await fetch('http://localhost:5000/upload', {
                 method: 'POST',
@@ -91,6 +91,12 @@ const PlaySong = () => {
                     accept="audio/*"
                     onChange={(e) => setSongFile(e.target.files[0])}
                 />
+                <input 
+                    type='text' 
+                    placeholder='genre' 
+                    className='bg-gray-600 text-white'
+                    onChange={(e)=>setGenre(e.target.value)}
+                    />
                 <button type="submit">Upload Song</button>
             </form>    
             <div>
