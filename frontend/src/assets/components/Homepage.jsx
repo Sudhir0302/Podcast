@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Home, Compass, List, Clock } from "lucide-react";
+import { Home, Compass, List, Clock, Search } from "lucide-react";
 import Podcasts from "./Podcasts";
 import Box from "./Box";
 
 const Homepage = () => {
   const [songs, setSongs] = useState([]);
+  const [search,setSearch] = useState();
   const[Loading,setLoading]=useState(true);
   const [Filter,setFilter]=useState([]);
   const [Pod,setPod]=useState("songs")
@@ -39,6 +40,10 @@ const Homepage = () => {
     console.log(Filter);
   }
   
+  useEffect(()=>{
+    const filter=songs.filter((song)=>song.title.toLowerCase().includes(search.toLowerCase())); 
+    setFilter(filter); 
+  },[search]);
   return (
     <>
       <div className="flex flex-row justify-between text-white">
@@ -61,6 +66,7 @@ const Homepage = () => {
             <div className="relative flex-1 p-2">
               <input
                 type="text"
+                onChange={(e)=>setSearch(e.target.value)}
                 placeholder="Search through over 70 million podcasts and episodes"
                 className="w-4/5 bg-slate-800 rounded-md h-10 pl-3 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
